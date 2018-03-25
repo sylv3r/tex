@@ -1,0 +1,59 @@
+
+\usepackage{alkhemists}
+
+%%-----------------------------------------------------------------------------
+%% Paragraphs %%
+
+\linespread{1,1}
+\setlength{\parindent}{0em}
+
+
+%%-----------------------------------------------------------------------------
+%% Titles %%
+
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\alph{subsection}}
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\fontsize{11pt}{2em}\titlefont}
+  {\thesection.}{0,5em} % prefix
+  {}
+  [\titleline{\color{lightgrey}\titlerule}]
+
+\titlespacing*{\section}{0pt}{1em}{1em}
+
+\titleformat{\subsection}
+  {\fontsize{9pt}{1,7em}\bfseries}
+  {\thesubsection.}{0,5em} % prefix
+  {}
+  []
+
+\titlespacing*{\subsection}{0pt}{0.5em}{0em}
+
+
+%%-----------------------------------------------------------------------------
+%% Lists %%
+
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=*,labelsep=1em,itemsep=0.5em,parsep=0pt,
+  topsep=1em}
+
+\renewcommand\labelitemi{\textendash}
+
+
+%%-----------------------------------------------------------------------------
+%% Commands %%
+
+\newcommand\maintitle[1]{{
+  \kern 1em
+  {\color{lightgrey}\hrule height 1pt}
+  \kern 0.7em
+  \parindent \z@ \centering
+  \fontsize{18pt}{0em}\condensedfont\bfseries#1\par
+  \kern 0.7em
+  {\color{lightgrey}\hrule height 1pt}
+  \kern 0.5em
+}}
+

@@ -1,0 +1,7 @@
+\defaultfontfeatures[Condensed]
+{
+  Extension = .ttf,
+  Path = ${HOME}/.fonts/,
+  UprightFont = HelveticaNeueCondensedBold,
+  BoldFont = HelveticaNeueCondensedBlack,
+}

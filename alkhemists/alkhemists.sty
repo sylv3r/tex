@@ -1,0 +1,143 @@
+\usepackage{fontspec, xcolor, graphicx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% COLORS
+
+\definecolor{grey}{HTML}{999999}
+\definecolor{lightgrey}{HTML}{DDDDDD}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FONTS
+
+\RequirePackage{fontspec}
+
+\setmainfont{GillSans.ttc}[
+  Path = ${HOME}/.fonts/,
+  UprightFeatures = {FontIndex=7},
+  BoldFeatures = {FontIndex=0},
+  ItalicFeatures = {FontIndex=8},
+  BoldItalicFeatures = {FontIndex=2},
+]
+\newfontfamily{\titlefont}{Title}
+\newfontfamily{\condensedfont}{Condensed}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% STYLES
+
+\newcommand{\title@style}[0]{\fontsize{22pt}{3em}\titlefont}
+\newcommand{\order@style}[0]{\fontsize{14pt}{3em}\titlefont\bfseries}
+\newcommand{\date@style}[0]{\fontsize{12pt}{2em}\titlefont}
+\newcommand{\parties@style}[0]{\fontsize{28pt}{2em}\condensedfont\bfseries}
+\newcommand{\section@style}[0]{\fontsize{18pt}{2em}\titlefont}
+\newcommand{\subsection@style}[0]{\fontsize{14pt}{2em}\titlefont\bfseries}
+\newcommand{\subsubsection@style}[0]{\fontsize{14pt}{2em}\titlefont\bfseries}
+\newcommand{\footer@style}[0]{\fontsize{7pt}{0em}\titlefont\bfseries}
+\newcommand{\pager@style}[0]{\fontsize{8pt}{0em}\condensedfont\bfseries}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LISTS
+
+\RequirePackage{pifont}
+
+\renewcommand\labelitemi{\ding{118}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TABLE
+
+\usepackage{tabu}
+
+\definecolor{tableHeader}{HTML}{000000}
+\definecolor{tableOddLine}{HTML}{FFFFFF}
+\definecolor{tableEvenLine}{HTML}{f3f3F4}
+
+\newcommand{\tableHeaderStyle}{
+  \rowfont{\leavevmode\color{white}\bfseries}
+  \rowcolor{tableHeader}
+}
+
+\newcommand{\tableFooterStyle}{
+  \rowfont{\leavevmode\color{black}\bfseries}
+}
+
+\taburowcolors[2] 2{tableOddLine .. tableEvenLine}
+% \tabulinesep = ^2pt
+% \everyrow{\tabucline{1pt white}{}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE SECTIONS FORMAT
+
+\RequirePackage{titlesec}
+
+\titleformat{\section}
+  {\section@style}
+  {\thesection.}{0,5em} % prefix
+  {} % code before heading
+  [\titleline{\color{grey}\titlerule}]
+
+\renewcommand\thesubsection{\arabic{subsection}}
+\titleformat{\subsection}
+  {\subsection@style}
+  {\textbf{\thesubsection.}}{0,5em} % prefix
+  {} % code before heading
+  [\titleline{\color{lightgrey}\titlerule}]
+
+\titleformat{\subsubsection}
+  {\subsubsection@style}
+  {\textbf{\thesubsubsection\ -}}{0,5em} % prefix
+  {} % code before heading
+  []
+
+\titlespacing*{\section}{0pt}{1em}{2em}
+\titlespacing*{\subsection}{0em}{1em}{1.5em}
+\titlespacing*{\subsubsection}{0em}{1em}{1em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RENEWCOMMAND
+
+% \newcommand\mydot[1]{\scalebox{#1}{.}}
+% \renewcommand\cftdot{\mydot{1}}
+% \renewcommand\cftdotsep{2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ENVIRONMENTS
+
+\newenvironment{mygantt}[2]
+{
+  \ganttset{calendar week text={\currentweek}}
+  \begin{ganttchart}[
+    vgrid={draw=none, dotted},
+    hgrid,
+    inline,
+    x unit=1.38mm,
+    time slot format=isodate,
+    group peaks height=.2,
+    group peaks width=1.5,
+    group left shift=0,
+    group right shift=0,
+    group height=.3,
+    group peaks tip position=0,
+    group label font=\fontsize{10pt}{1em}\bfseries\color{black},
+    title/.append style={draw=none, fill=black},
+    title label font=\small\bfseries\color{white},
+    title left shift=.1,
+    title right shift=-.1,
+    title height=0.8,
+    bar/.append style={draw=none, fill=black!25},
+    bar height=.7,
+    bar label font=\fontsize{8pt}{0em}\bfseries\color{black},
+    % bar inline label node/.append style={right=15mm},
+    milestone left shift = -1,
+    milestone right shift = 1,
+    milestone label font=\fontsize{9pt}{0em}\itshape,
+    milestone inline label node/.append style={left=3mm},
+    link mid=.3, link bulge=2,
+  ]{#1}{#2}
+}
+{
+  /end{ganttchart}
+}

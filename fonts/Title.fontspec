@@ -1,0 +1,7 @@
+\defaultfontfeatures[Title]
+{
+  Extension = .ttf,
+  Path = ${HOME}/.fonts/,
+  UprightFont = HelveticaNeueUltraLight,
+  BoldFont = HelveticaNeueLight,
+}
